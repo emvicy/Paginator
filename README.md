@@ -8,7 +8,7 @@ a Pagination module for Emvicy PHP Framework: https://github.com/emvicy/Emvicy
 cd into the modules folder and clone your copy:
 
 ~~~bash
-git clone --branch 1.x https://github.com/gueff/Emvicy_Paginator.git Paginator
+git clone --branch 1.x https://github.com/emvicy/Paginator.git
 ~~~
 
 ## Usage
