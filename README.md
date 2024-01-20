@@ -1,7 +1,7 @@
 
 # Paginator
 
-a Pagination module for Emvicy PHP Framework
+a Pagination module for Emvicy PHP Framework: https://github.com/emvicy/Emvicy
 
 ## Install
 
