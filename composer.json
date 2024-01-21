@@ -1,0 +1,17 @@
+{
+  "name": "emvicy/paginator",
+  "type": "module",
+  "description": "Pagination module for Emvicy PHP Framework",
+  "keywords": ["emvicy","module","pagination","paginator"],
+  "homepage": "https://github.com/emvicy/Paginator",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Guido K.B.W. Ueffing"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=8.0"
+  }
+}
