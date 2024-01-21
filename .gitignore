@@ -1,0 +1,16 @@
+.git
+.idea
+.bak
+.trash
+.env
+.phpstorm.meta.php
+gen
+*.tar.gz
+vendor
+_gitPull.sh
+_gitPush.sh
+_gitPush.sh.example
+_phanlistcreate.sh
+Changelog.md
+#**/*.min.css
+#**/*.min.js
