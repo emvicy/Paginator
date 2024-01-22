@@ -22,13 +22,14 @@ class Paginator
 {
     /**
      * @param \MVC\DB\Model\Db $oDb
-     * @param int              $iMaxProPage
-     * @param int              $iMaxPaginationTabs
-     * @param \MVC\View        $oView
+     * @param int $iMaxProPage
+     * @param int $iMaxPaginationTabs
+     * @param \MVC\View $oView
+     * @param array $aDTDBOption
      * @return \MVC\DB\DataType\DB\TableDataType[]
      * @throws \ReflectionException
      */
-    public static function calc(\MVC\DB\Model\Db $oDb, int $iMaxProPage = 1, int $iMaxPaginationTabs = 1, \MVC\View $oView)
+    public static function calc(\MVC\DB\Model\Db $oDb, int $iMaxProPage = 1, int $iMaxPaginationTabs = 1, \MVC\View $oView, array $aDTDBOption = array())
     {
         // add the template directory of this module,
         // so that these templates can also be found and used from the primary module.nnen
@@ -45,7 +46,7 @@ class Paginator
         ($iCurrentPage > $iAmountPages) ? $iCurrentPage = $iAmountPages : false;
 
         // Db Limit start, amount
-        $iLimitPointer = (($iCurrentPage - 1) * $iMaxProPage);
+        $iLimitPointer = (int) (($iCurrentPage - 1) * $iMaxProPage);
         $iLimitAmount = $iMaxProPage;
 
         // Corrections
@@ -68,10 +69,10 @@ class Paginator
             $iNavTabEnd = $iAmountPages;
         }
 
+        $aDTDBOption[] = DTDBOption::create()->set_sValue('LIMIT ' . $iLimitPointer . ', ' . $iLimitAmount);
+
         // Get items from DB Table
-        $aDTTable = $oDb->retrieve(aDTDBOption: [
-            DTDBOption::create()->set_sValue('LIMIT ' . $iLimitPointer . ', ' . $iLimitAmount)
-        ]);
+        $aDTTable = $oDb->retrieve(aDTDBOption: $aDTDBOption);
 
         // assign vars
         $oView->assign('Paginator_iAmountPages', $iAmountPages);
