@@ -31,8 +31,7 @@ $aDTFooModelTableUser = Paginator::calc(
     iMaxPaginationTabs: 18,       // max amount of Pagination Tabs
     oView: view(),                // View Object
     aDTDBOption: [                // sql option    
-        DTDBOption::create()->set_sValue('ORDER BY `name` DESC')),
-        DTDBOption::create()->set_sValue('LIMIT 0, 10'))
+        DTDBOption::create()->set_sValue('ORDER BY `name` DESC'))
     ]
 );
 ~~~
