@@ -16,23 +16,23 @@ git clone --branch 1.x https://github.com/emvicy/Paginator.git
 _Request a subset of User_  
 ~~~php
 $aDTFooModelTableUser = Paginator::calc(
+    oView: view()                 // View Object
     oDb: DB::$oFooModelTableUser, // DB Object
     iMaxProPage: 3,               // how many Items pro Page 
     iMaxPaginationTabs: 18,       // max amount of Pagination Tabs
-    oView: view()                 // View Object
 );
 ~~~
 
 _Request a subset of User_
 ~~~php
 $aDTFooModelTableUser = Paginator::calc(
-    oDb: DB::$oFooModelTableUser, // DB Object
-    iMaxProPage: 3,               // how many Items pro Page 
-    iMaxPaginationTabs: 18,       // max amount of Pagination Tabs
     oView: view(),                // View Object
+    oDb: DB::$oFooModelTableUser, // DB Object
     aDTDBOption: [                // sql option    
         DTDBOption::create()->set_sValue('ORDER BY `name` DESC'))
-    ]
+    ],
+    iMaxProPage: 3,               // how many Items pro Page 
+    iMaxPaginationTabs: 18,       // max amount of Pagination Tabs
 );
 ~~~
 

@@ -21,15 +21,15 @@ use MVC\DataType\DTDBOption;
 class Paginator
 {
     /**
+     * @param \MVC\View        $oView
      * @param \MVC\DB\Model\Db $oDb
-     * @param int $iMaxProPage
-     * @param int $iMaxPaginationTabs
-     * @param \MVC\View $oView
-     * @param array $aDTDBOption
+     * @param array            $aDTDBOption
+     * @param int              $iMaxProPage
+     * @param int              $iMaxPaginationTabs
      * @return \MVC\DB\DataType\DB\TableDataType[]
      * @throws \ReflectionException
      */
-    public static function calc(\MVC\DB\Model\Db $oDb, int $iMaxProPage = 1, int $iMaxPaginationTabs = 1, \MVC\View $oView, array $aDTDBOption = array())
+    public static function calc(\MVC\View $oView, \MVC\DB\Model\Db $oDb, array $aDTDBOption = array(), int $iMaxProPage = 1, int $iMaxPaginationTabs = 1)
     {
         // add the template directory of this module,
         // so that these templates can also be found and used from the primary module.nnen
