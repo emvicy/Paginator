@@ -9,7 +9,7 @@
             </a>
         </li>
 
-        {assign var=Paginator_iCount value=$Paginator_iNavTabStart}
+        {assign var=Paginator_iCount value=$Paginator_iNavTabStart|floor}
 
         {* Iteration *}
         {section name=Paginator_Iteration start=$Paginator_iNavTabStart step=1 loop=$Paginator_iNavTabEnd}
@@ -19,7 +19,7 @@
 
             <li class="page-item" style="width: 65px;text-align: center;">
                 <a class="page-link {if $Paginator_iCurrentPage == $Paginator_iCount}active{/if}" href="?p={$Paginator_iCount}">
-                    {$Paginator_iCount|floor}
+                    {$Paginator_iCount}
                 </a>
             </li>
         {/section}
