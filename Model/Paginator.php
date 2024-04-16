@@ -23,13 +23,14 @@ class Paginator
     /**
      * @param \MVC\View        $oView
      * @param \MVC\DB\Model\Db $oDb
+     * @param array            $aDTDBWhere
      * @param array            $aDTDBOption
      * @param int              $iMaxProPage
      * @param int              $iMaxPaginationTabs
      * @return \MVC\DB\DataType\DB\TableDataType[]
      * @throws \ReflectionException
      */
-    public static function calc(\MVC\View $oView, \MVC\DB\Model\Db $oDb, array $aDTDBOption = array(), int $iMaxProPage = 1, int $iMaxPaginationTabs = 1)
+    public static function calc(\MVC\View $oView, \MVC\DB\Model\Db $oDb, array $aDTDBWhere = array(), array $aDTDBOption = array(), int $iMaxProPage = 1, int $iMaxPaginationTabs = 1)
     {
         // add the template directory of this module,
         // so that these templates can also be found and used from the primary module.nnen
@@ -37,9 +38,9 @@ class Paginator
             realpath(__DIR__ . '/../' . '/templates/')
         );
 
-        $iAmountClients = $oDb->count();                           # Number of all items in the requested DB table
-        $iAmountPages = ceil($iAmountClients / $iMaxProPage); # Number of individual pagination pages
-        $iCurrentPage = (int) get($_GET['p'], 1);   # current pagination page
+        $iAmountItems = $oDb->count();                      # Number of all items in the requested DB table
+        $iAmountPages = ceil($iAmountItems / $iMaxProPage); # Number of individual pagination pages
+        $iCurrentPage = (int) get($_GET['p'], 1);           # current pagination page
 
         // Corrections
         ($iCurrentPage < 1) ? $iCurrentPage = 1 : false;
@@ -72,7 +73,7 @@ class Paginator
         $aDTDBOption[] = DTDBOption::create()->set_sValue('LIMIT ' . $iLimitPointer . ', ' . $iLimitAmount);
 
         // Get items from DB Table
-        $aDTTable = $oDb->retrieve(aDTDBOption: $aDTDBOption);
+        $aDTTable = $oDb->retrieve(aDTDBWhere: $aDTDBWhere, aDTDBOption: $aDTDBOption);
 
         // assign vars
         $oView->assign('Paginator_iAmountPages', $iAmountPages);

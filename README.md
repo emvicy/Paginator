@@ -28,7 +28,10 @@ _Request a subset of User_
 $aDTFooModelTableUser = Paginator::calc(
     oView: view(),                // View Object
     oDb: DB::$oFooModelTableUser, // DB Object
-    aDTDBOption: [                // sql option    
+    aDTDBWhere: [                 // sql WHERE option
+        DTDBWhere::create()->set_sKey('id_FooModelTableGroup')->set_sRelation('>=')->set_sValue(1)
+    ],
+    aDTDBOption: [                // sql option
         DTDBOption::create()->set_sValue('ORDER BY `name` DESC'))
     ],
     iMaxProPage: 3,               // how many Items pro Page 
