@@ -48,6 +48,7 @@ class Paginator
 
         // Db Limit start, amount
         $iLimitPointer = (int) (($iCurrentPage - 1) * $iMaxProPage);
+        ($iLimitPointer < 0) ? $iLimitPointer = 0 : false;
         $iLimitAmount = $iMaxProPage;
 
         // Corrections
