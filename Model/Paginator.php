@@ -14,6 +14,7 @@
 namespace Paginator\Model;
 
 use MVC\DataType\DTDBOption;
+use MVC\Registry;
 
 /**
  * Paginator
@@ -76,12 +77,38 @@ class Paginator
         // Get items from DB Table
         $aDTTable = $oDb->retrieve(aDTDBWhere: $aDTDBWhere, aDTDBOption: $aDTDBOption);
 
-        // assign vars
+        // save vars to registry
+        Registry::set('aPaginatorSet', [
+            'Paginator_iAmountPages' => $iAmountPages,
+            'Paginator_iCurrentPage' => $iCurrentPage,
+            'Paginator_iNavTabStart' => $iNavTabStart,
+            'Paginator_iNavTabEnd' => $iNavTabEnd,
+        ]);
+
+        // assign vars to view
         $oView->assign('Paginator_iAmountPages', $iAmountPages);
         $oView->assign('Paginator_iCurrentPage', $iCurrentPage);
         $oView->assign('Paginator_iNavTabStart', $iNavTabStart);
         $oView->assign('Paginator_iNavTabEnd', $iNavTabEnd);
 
         return $aDTTable;
+    }
+
+    /**
+     * @return array
+     * @throws \ReflectionException
+     */
+    public static function getPaginatorSet() : array
+    {
+        return (
+            (Registry::isRegistered('aPaginatorSet'))
+            ? (array) Registry::get('aPaginatorSet')
+            : [
+                'Paginator_iAmountPages' => 0,
+                'Paginator_iCurrentPage' => 1,
+                'Paginator_iNavTabStart' => 1,
+                'Paginator_iNavTabEnd' => 1,
+            ]
+        );
     }
 }
