@@ -5,12 +5,16 @@ a Pagination module for Emvicy2 (2.x) PHP Framework: https://github.com/emvicy/E
 
 ---
 
-## Install
+## Installation
 
-cd into the modules folder and clone your copy:
-
+_cd into the modules folder of your `Emvicy` copy; e.g.:_
 ~~~bash
-git clone --branch 2.x https://github.com/emvicy/Paginator.git
+cd /var/www/html/modules/;
+~~~
+
+_clone `Paginator`_  
+~~~bash
+git clone --branch 2.x https://github.com/emvicy/Paginator.git Paginator;
 ~~~
 
 ---
