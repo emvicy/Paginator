@@ -17,47 +17,61 @@ git clone --branch 2.x https://github.com/emvicy/Paginator.git
 
 ## Usage Examples
 
-**In your Emvicy2 Controller**
+**In your Emvicy2 Controller/method**
 
 _Request a subset of `oAppTableUser`_  
 ~~~php
-$aDTAppTableUser = Paginator::calc(
-    oView: view()                  // View Object
-    oDb: DB::use()->oAppTableUser, // DB Object
-    iMaxProPage: 3,                // how many Items pro Page 
-    iMaxPaginationTabs: 18,        // max amount of Pagination Tabs
-);
+/**
+ * @param \MVC\DataType\DTRequestIn $oDTRequestIn
+ * @param \MVC\DataType\DTRoute     $oDTRoute
+ * @return void
+ * @throws \ReflectionException
+ */
+public function index(DTRequestIn $oDTRequestIn, DTRoute $oDTRoute)
+{
+    $aAppTableUser = Paginator::calc(
+        oView: view(),                 // View Object
+        oDb: DB::use()->oAppTableUser, // DB Object
+        iMaxProPage: 10,               // how many Items pro Page
+        iMaxPaginationTabs: 18,        // max amount of Pagination Tabs
+    );
+
+    view()->assign('aAppTableUser', $aAppTableUser);
+    view()->autoAssign();
+}
 ~~~
 
 _or, Request a subset also with `where` and `option` settings_  
 ~~~php
-$aDTAppTableUser = Paginator::calc(
-    oView: view(),                // View Object
-    oDb: DB::use()->oAppTableUser, // DB Object
-    aDTDBWhere: [                 // sql WHERE option
-        DTDBWhere::create()->set_sKey('id_AppTableGroup')->set_sRelation('>=')->set_sValue(1)
-    ],
-    aDTDBOption: [                // sql option
-        DTDBOption::create()->set_sValue('ORDER BY `name` DESC'))
-    ],
-    iMaxProPage: 3,               // how many Items pro Page 
-    iMaxPaginationTabs: 18,       // max amount of Pagination Tabs
-);
-~~~
+/**
+ * @param \MVC\DataType\DTRequestIn $oDTRequestIn
+ * @param \MVC\DataType\DTRoute     $oDTRoute
+ * @return void
+ * @throws \ReflectionException
+ */
+public function index(DTRequestIn $oDTRequestIn, DTRoute $oDTRoute)
+{
+    $aDTAppTableUser = Paginator::calc(
+        oView: view(),                // View Object
+        oDb: DB::use()->oAppTableUser,// DB Object
+        aDTDBWhere: [                 // sql WHERE option
+            DTDBWhere::create()->set_sKey('id_AppTableGroup')->set_sRelation('>=')->set_sValue(1)
+        ],
+        aDTDBOption: [                // sql option
+            DTDBOption::create()->set_sValue('ORDER BY `name` DESC'))
+        ],
+        iMaxProPage: 3,               // how many Items pro Page 
+        iMaxPaginationTabs: 18,       // max amount of Pagination Tabs
+    );
 
-_assign the Result `$aDTAppTableUser` to your View_  
-~~~php
-view()->assign('aDTAppTableUser', $aDTAppTableUser);
+    view()->assign('aAppTableUser', $aAppTableUser);
+    view()->autoAssign();
+}
 ~~~
 
 ---
 
 **In your Emvicy2 Template**
-
-_include this Paginator template_  
-~~~php
-{include file="Paginator_pagination.tpl"}
-~~~
 
 _full Template example_  
 ~~~php
