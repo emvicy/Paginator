@@ -1,5 +1,6 @@
 <!-- https://getbootstrap.com/docs/5.3/components/pagination/ -->
 
+{nocache}
 <nav aria-label="Page navigation example">
     <ul class="pagination">
 
@@ -31,3 +32,4 @@
         </li>
     </ul>
 </nav>
+{/nocache}
