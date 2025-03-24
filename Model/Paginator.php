@@ -39,7 +39,7 @@ class Paginator
             realpath(__DIR__ . '/../' . '/templates/')
         );
 
-        $iAmountItems = $oDb->count($aDTDBWhere);                   # Number of all items in the requested DB table
+        $iAmountItems = $oDb->count($aDTDBWhere, $aDTDBOption);     # Number of all items in the requested DB table
         $iAmountPages = ceil($iAmountItems / $iMaxProPage);    # Number of individual pagination pages
         $iCurrentPage = (int) get($_GET['p'], 1);                   # current pagination page
 
