@@ -41,7 +41,7 @@ class Paginator
 
         $iAmountItems = $oDb->count($aDTDBWhere, $aDTDBOption);     # Number of all items in the requested DB table
         $iAmountPages = ceil($iAmountItems / $iMaxProPage);    # Number of individual pagination pages
-        $iCurrentPage = (int) get($_GET['p'], 1);                   # current pagination page
+        $iCurrentPage = (int) ($_GET['p'] ?? 1);                    # current pagination page
 
         // Corrections
         ($iCurrentPage < 1) ? $iCurrentPage = 1 : false;
