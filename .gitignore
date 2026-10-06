@@ -12,5 +12,6 @@ _gitPush.sh
 _gitPush.sh.example
 _phanlistcreate.sh
 Changelog.md
+composer.lock
 #**/*.min.css
 #**/*.min.js
