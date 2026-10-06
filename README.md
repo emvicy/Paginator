@@ -1,7 +1,7 @@
 
-# Paginator
+# Paginator 3
 
-a Pagination module for Emvicy2 (2.x) PHP Framework: https://github.com/emvicy/Emvicy/tree/2.x
+a Pagination module for Emvicy2 PHP Framework: https://github.com/emvicy/Emvicy/tree/2.x
 
 ---
 
@@ -12,16 +12,16 @@ _cd into the modules folder of your `Emvicy` copy; e.g.:_
 cd /var/www/html/modules/;
 ~~~
 
-_clone `Paginator`_  
+_clone `Paginator 3`_  
 ~~~bash
-git clone --branch 2.x https://github.com/emvicy/Paginator.git Paginator;
+git clone --branch 3.x https://github.com/emvicy/Paginator.git Paginator;
 ~~~
 
 ---
 
 ## Usage Examples
 
-**In your Emvicy2 Controller/method**
+### with `Paginator::calc()`
 
 _Request a subset of `oAppTableUser`_  
 ~~~php
@@ -75,11 +75,38 @@ public function index(DTRequestIn $oDTRequestIn, DTRoute $oDTRoute)
 
 ---
 
+### with `Paginator::calcOnSql()`
+
+_Request a subset of `oAppTableUser`_
+~~~php
+/**
+ * @param \MVC\DataType\DTRequestIn $oDTRequestIn
+ * @param \MVC\DataType\DTRoute     $oDTRoute
+ * @return void
+ * @throws \ReflectionException
+ */
+public function index(DTRequestIn $oDTRequestIn, DTRoute $oDTRoute)
+{
+    $aDTAppTableUser = Paginator::calcOnSql(
+        oView: view(),                 // View Object
+        oDb: \App\Table\User::use(),   // DB Object
+        sSqlSelect: "SELECT * " 
+        . "FROM `" . \App\Table\User::use()->sTableName . "` " 
+        . "ORDER BY `" . \App\Table\User::use()->sTableName . "`.`stampCreate` DESC",
+    );
+
+    view()->assign('aAppTableUser', $aAppTableUser);
+    view()->autoAssign();
+}
+~~~
+
+---
+
 **In your Emvicy2 Template**
 
 _full Template example_  
 ~~~php
-{include file="Paginator_pagination.tpl"}
+{include file="Paginator3_pagination.tpl"}
 
 <table class="table table-responsive-sm table-sm table-hover">
     <!--column names-->
@@ -110,5 +137,5 @@ _full Template example_
     </tbody>
 </table>
 
-{include file="Paginator_pagination.tpl"}
+{include file="Paginator3_pagination.tpl"}
 ~~~
